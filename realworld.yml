@@ -1,0 +1,8 @@
+apps:
+  - name: realworld-ruby
+    script: ./bin/start
+    interpreter: /bin/sh
+    exec_mode: fork
+    instances: 1
+    env:
+      API_AUTH_TOKEN_SECRET: dont_tell_anyone
