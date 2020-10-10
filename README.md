@@ -19,6 +19,27 @@ For convenience, we provide the following scripts:
 
 If you don't want to use docker, you can take a look at the [Dockerfile](https://github.com/schoolhouse-io/colmena-realworld-example-app/blob/master/Dockerfile) and [docker-compose.yml](https://github.com/schoolhouse-io/colmena-realworld-example-app/blob/master/docker-compose.yml) to find out what runtime dependencies are required.
 
+### Without Docker on CentOS 8
+
+Run these steps as root:
+
+```
+dnf -y install ruby ruby-devel rubygem-bundler
+gem pristine jaro_winkler --version 1.5.4
+gem pristine puma --version 3.12.6
+gem pristine sqlite3 --version 1.4.2
+```
+
+Run these steps as the user running the app:
+
+```
+bundle config --global jobs $(expr $(getconf _NPROCESSORS_ONLN) - 1)
+bundle install
+export API_AUTH_TOKEN_SECRET=dont_tell_anyone
+bin/start 
+```
+
+Or use the `realworld.yml` file here intended for use by PM2 (https://pm2.keymetrics.io/)
 
 ## What is Colmena?
 
